@@ -1,0 +1,85 @@
+# Site/SEO settings
+email: doscm164@naver.com
+baseurl: ""
+permalink: /:year/:month/:day/:title/
+google_analytics:
+
+name: Devgw
+title: 지나가던컴공 IT 블로그
+description: >
+  Barber is a blog theme for Jekyll built by Thomas Vaeth for Samesies using HTML, Sass, and JavaScript.
+url: http://barber.samesies.io
+twitter_username: thomasvaeth
+default_img: /assets/images/seo.jpg
+social:
+  - name: twitter
+    url: https://twitter.com/thomasvaeth
+  - name: instagram
+    url: http://www.instagimg.com/user/geonwoo_j/
+  - name: linkedin
+    url: https://www.linkedin.com/in/%EA%B1%B4%EC%9A%B0-%EC%A0%95-a5212b169/
+  - name: github
+    url: https://github.com/devgw/
+  - name: codepen
+    url: https://codepen.io/thomasvaeth/
+
+# Contact settings
+contact_img: /assets/images/placeholder-28.jpg
+formcarry: https://formcarry.com/s/HkIo0nMb7
+
+# Disqus settings
+disqus: test-apkdzgmqhj
+
+# MailChimp settings
+mailchimp_action: https://samesies.us17.list-manage.com/subscribe/post-json?u=66ddf555dab480e6a8606430b&amp;id=89b3ee034f
+mailchimp_input: b_66ddf555dab480e6a8606430b_89b3ee034f
+
+# Author settings
+author:
+  - name: Devgw
+    bio: 부산에서 컴퓨터공학을 전공하고 현재 React, React Native 에 관심을 두고 있습니다.
+    url: https://github.com/devgw/
+
+# Pagination settings
+pagination:
+  enabled: true
+  debug: false
+  per_page: 12
+  permalink: "/page/:num/"
+  title: ":title"
+  limit: 0
+  sort_field: "date"
+  sort_reverse: true
+autopages:
+  enabled: true
+  categories:
+    enabled: false
+  collections:
+    enabled: false
+  tags:
+    layouts:
+      - "tag.html"
+    title: "지나가던컴공 IT블로그"
+    permalink: "/tag/:tag"
+    slugify:
+      mode: raw
+      cased: true
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-paginate-v2
+  - jekyll-sitemap
+compress_html:
+  clippings: all
+  comments: all
+  startings: [html, head, body]
+exclude:
+  - node_modules
+  - .DS_Store
+  - barber.jpg
+  - Gemfile
+  - Gemfile.lock
+  - gulpfile.js
+  - package.json
+  - README.md
