@@ -1,0 +1,213 @@
+---
+layout: post
+title: "Passport kakao, github 회원가입"
+date: 2018-12-28
+description: 
+image: /assets/images/passport.png
+author: Jeong geonwoo
+---
+## Passport
+passport 란?
+passport 는 인증 절차 로직을 편하게 작업할 수 있게 도와주는 nodejs 의 미들웨어 이다.
+
+[공식문서](http://www.passportjs.org/docs/downloads/html/)
+
+### Strategy
+
+우선 passport 의 strategy 를 알아보자.Strategy 란 passpor 에서 쓰이는 인증 방식이다.대표적으로 passport-local 이 있고, 흔히 사용하는 id/pwd 를 이용해 쿠키-세션으로 인증하는 strategy 이다.
+
+필자는 `passport-local-mongoose` 을 사용 하였으므로, `passport-local` 을 이용하려면 지금부터는 [공식문서](http://www.passportjs.org/packages/passport-local/)를 참고하길 바란다.
+
+### passport-local-mongoose
+
+passport 를 이용한 kakao, github social login
+
+    passport-local-mongoose 설치 => 유저모델 생성 => passport 선언 => passport-local 기본설정 => 사용
+
+  STEP 1. 설치
+  ```
+  npm install passport passport-local passport-local-mongoose
+  or
+  yarn add passport passport-local passport-local-mongoose
+  ```
+
+  STEP 2. User 모델 생성
+
+  `User.js`
+  ```javascript
+import mongoose from "mongoose";
+import passportLocalMongose from "passport-local-mongoose";
+const UserSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  avatarUrl: String,
+  authApply: Boolean,
+  githubId: Number,
+  kakaoId: Number,
+  //소셜 로그인 기능을 만들 예정이라면 미리 해당 속성을 생성 해두자
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment"
+    }
+  ],
+  videos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video"
+    }
+  ]
+});
+
+UserSchema.plugin(passportLocalMongose, { usernameField: "email" });
+
+const model = mongoose.model("User", UserSchema);
+export default model;
+```
+
+  STEP 3. passport 선언
+
+  `app.js`
+  ```javascript
+import passport from "passport";
+import ... from ...
+
+...;
+app.use(passport.initialize()); 
+// initialize 해두면 user 의 정보가 req.user 에 실린다
+app.use(passport.session());
+// session 으로 로그인 지속을 시킨다면 필수 적으로 입력해준다.
+// session 을 이용하기 위해선 express-session 의 설치도 필수도 필수이다.
+...;
+  ```
+```
+npm install express-session
+or
+yarn add express-session
+```
+
+  STEP 4. passport 설정
+
+  ```javascript
+import passport from "passport";
+import User from "./models/User";
+import GithubStrategy from "passport-github";
+import KakaoStrategy from "passport-kakao";
+import {
+  githubLoginCallback,
+  kakaoLoginCallback
+} from "./controllers/userController";
+import routes from "./routes";
+import dotenv from "dotenv";
+dotenv.config();
+passport.use(User.createStrategy());
+passport.use(
+  new GithubStrategy(
+    {
+      clientID: process.env.GH_ID,
+      clientSecret: process.env.GH_SECRET,
+      callbackURL: process.env.PRODUCTION
+        ? `https://null-lecture.herokuapp.com${routes.githubCallback}`
+        : `http://localhost:40d00${routes.githubCallback}`
+    },
+    githubLoginCallback
+  )
+);
+// github 소셜 로그인
+passport.use(
+  new KakaoStrategy(
+    {
+      clientID: process.env.KAKAO_ID,
+      callbackURL: process.env.PRODUCTION
+        ? `https://null-lecture.herokuapp.com${routes.kakaoCallback}`
+        : `http://localhost:4000${routes.kakaoCallback}`
+    },
+    kakaoLoginCallback
+  )
+);
+// kakao 소셜 로그인
+passport.serializeUser(User.serializeUser());
+//필수
+passport.deserializeUser(User.deserializeUser());
+//필수
+  ```
+
+[문서](http://www.passportjs.org/packages/) 를 참고해보면 소셜 로그인을 얼마나 간단하게 만들 수 있는지 알 수 있다. 그리고 `clientID`, `callbackURL` 는 공개 되면 안되니까 꼭 `.env` 파일에 저장해두자 필자는 참고로 카카오는 소셜 로그인에 `clientSecret` 를 사용하지 않으니 empty string("") 을 넘기거나 넘기지 않아도 된다. `clientSecret` 를 한참 찾아 해맸다.
+
+본론으로 돌아가서 `passport-local-mongoose` 을 사용하면 `passport-local` 코드가 대폭 줄어들게 된다. 
+```javascript
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+```
+위 3줄이면 모든 설정이 끝난다. 이때 `stategy` 는 로그인하는 방식을 말한다. `serializeUser` 는 어떤 정보를 쿠키에 줄지, 사용자에 대해서 어떤 정보를 가질 수 있는지 설정하고 `deserializeUser` 는 이름 그대로 serializer 를 deserializeUser 해준다. 마지막으로 `app.js` 에 `import "./passport"` 를 추가한다.
+
+ STEP 5. passport 사용
+
+ * 회원가입
+
+ ```javascript
+ export const postJoin = async (req, res, next) => {
+  const {
+    body: { name, email, password, password2 }
+  } = req;
+  if (password !== password2) {
+    res.status(400);
+    res.rendser("join", { pageTitle: "Join" });
+  } else {
+    try {
+      const user = await User({
+        name,
+        email,
+        avatarUrl: "../img/defaultProfile.png",
+        authApply: false
+      });
+      await User.register(user, password);
+      //register: 새 사용자 인스턴스를 주어진 암호로 등록하는 편리한 방법이다.(passport local mongoose 에서 제공)
+    } catch (error) {
+      console.log(error);
+      res.redirect(routes.home);
+    }
+  }
+};
+```
+
+회원가입 요청에대한 함수
+```javascript
+export const postLogin = passport.authenticate("local", {
+  successRedirect: routes.home, // 회원가입 성공
+  failureRedirect: routes.login // 회원가입 실패
+});
+ ```
+
+ * kakao 회원가입
+
+```javascript
+export const kakaoLogin = passport.authenticate("kakao");
+
+export const kakaoLoginCallback = async (_, __, profile, done) => {
+  const {
+    _json: { id, properties, kaccount_email }
+  } = profile;
+  const { profile_image, nickname } = properties;
+  try {
+    const newUser = await User.create({
+        name: nickname,
+        email: kaccount_email,
+        avatarUrl: profile_image,
+        kakaoId: id,
+        authApply: false
+      });
+      done(null, newUser);
+  } catch (error) {
+    console.log(error);
+    done(error);
+  }
+};
+```
+
+`kakaoLoginCallback` 은 위 `passport.js` 에서 `KakaoStrategy` 의 콜백으로 호출 되며 `(accessToken, refreshToken, profile, done)` 의 parameter 를 갖는다.
+
+
+Router 를 통해 해당 코드를 접근하면 회원가입이 완료된다. 
+* 비밀번호 체크, 또는 중복가입 코드는 제외하고 올렸으므로 세부적인 기능은 직접 작성해서 사용
