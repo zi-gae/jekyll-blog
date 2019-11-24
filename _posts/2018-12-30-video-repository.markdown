@@ -6,9 +6,7 @@ description:
 image: /assets/images/null-videolecture.png
 author: Jeong geonwoo
 tags: 
-  - express
-  - javascript
-  - nodejs
+  - node
 ---
 학과 내에서 운영하는 창업동아리에서 필요로 하여 만들게 되었으며, 필자는 컴퓨터공학과이기 때문에 팀원들 모두 동일한 전공이고 알고리즘을 공부하자는 취지로 다운 받은 알고리즘 강의를 다 같이 보기 위해 프로젝트를 진행하였다. 해당 사이트의 아래 기능에 중점을 두고 개발하였다.
 

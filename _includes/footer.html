@@ -3,8 +3,8 @@
   <div class="grid">
     <div class="subscribe" id="subscribe">
       <div class="subscribe__container">
-        <span class="subscribe__title">Subscribe</span>
-        <p class="subscribe__text">Get a weekly email of posts I’ve added to the site.</p>
+        <span class="subscribe__title">구독</span>
+        <p class="subscribe__text">이제 이메일로 주마다 추가된 게시글을 받아 봅니다.</p>
         {% include subscribe-form.html %}
       </div>
     </div>
@@ -14,7 +14,7 @@
     <div class="footer__container">
       {% tags_list :threshold => 1, :sort_by => count, :order_by => desc, :limit => 5 %}
 
-      {% include social.html %}
+      {% comment %} {% include social.html %} {% endcomment %}
     </div>
   </div>
 </footer>

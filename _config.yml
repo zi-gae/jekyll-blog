@@ -7,21 +7,17 @@ google_analytics:
 name: Devgw
 title: 지나가던컴공 IT 블로그
 description: >
-  Barber is a blog theme for Jekyll built by Thomas Vaeth for Samesies using HTML, Sass, and JavaScript.
-url: http://barber.samesies.io
+  devgw blog
+url: http://devgw.netlify.com
 twitter_username: thomasvaeth
 default_img: /assets/images/seo.jpg
 social:
-  - name: twitter
-    url: https://twitter.com/thomasvaeth
   - name: instagram
-    url: http://www.instagimg.com/user/geonwoo_j/
+    url: http://www.instagimg.com/user/geonwoo__j/
   - name: linkedin
     url: https://www.linkedin.com/in/%EA%B1%B4%EC%9A%B0-%EC%A0%95-a5212b169/
   - name: github
     url: https://github.com/devgw/
-  - name: codepen
-    url: https://codepen.io/thomasvaeth/
 
 # Contact settings
 contact_img: /assets/images/placeholder-28.jpg
