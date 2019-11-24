@@ -4,10 +4,10 @@
     <title>지나가던컴공 IT 블로그</title>
     <description>Barber is a blog theme for Jekyll built by Thomas Vaeth for Samesies using HTML, Sass, and JavaScript.
 </description>
-    <link>http://barber.samesies.io</link>
-    <atom:link href="http://barber.samesies.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 Nov 2019 02:38:05 +0900</pubDate>
-    <lastBuildDate>Mon, 25 Nov 2019 02:38:05 +0900</lastBuildDate>
+    <link>http://localhost:4000</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 25 Nov 2019 03:44:36 +0900</pubDate>
+    <lastBuildDate>Mon, 25 Nov 2019 03:44:36 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -58,14 +58,10 @@
 
 </description>
         <pubDate>Sun, 30 Dec 2018 00:00:00 +0900</pubDate>
-        <link>http://barber.samesies.io/2018/12/30/video-repository/</link>
-        <guid isPermaLink="true">http://barber.samesies.io/2018/12/30/video-repository/</guid>
+        <link>http://localhost:4000/2018/12/30/video-repository/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/12/30/video-repository/</guid>
         
-        <category>express</category>
-        
-        <category>javascript</category>
-        
-        <category>nodejs</category>
+        <category>node</category>
         
         
       </item>
@@ -276,8 +272,10 @@ yarn add express-session
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 28 Dec 2018 00:00:00 +0900</pubDate>
-        <link>http://barber.samesies.io/2018/12/28/passport/</link>
-        <guid isPermaLink="true">http://barber.samesies.io/2018/12/28/passport/</guid>
+        <link>http://localhost:4000/2018/12/28/passport/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/12/28/passport/</guid>
+        
+        <category>node</category>
         
         
       </item>
@@ -303,8 +301,10 @@ request 객체에 cookies 속성이 부여된다.&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 28 Dec 2018 00:00:00 +0900</pubDate>
-        <link>http://barber.samesies.io/2018/12/28/cookie-parser/</link>
-        <guid isPermaLink="true">http://barber.samesies.io/2018/12/28/cookie-parser/</guid>
+        <link>http://localhost:4000/2018/12/28/cookie-parser/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/12/28/cookie-parser/</guid>
+        
+        <category>node</category>
         
         
       </item>
@@ -326,8 +326,82 @@ request 객체에 cookies 속성이 부여된다.&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 28 Dec 2018 00:00:00 +0900</pubDate>
-        <link>http://barber.samesies.io/2018/12/28/body-parser/</link>
-        <guid isPermaLink="true">http://barber.samesies.io/2018/12/28/body-parser/</guid>
+        <link>http://localhost:4000/2018/12/28/body-parser/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/12/28/body-parser/</guid>
+        
+        <category>node</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>최신 babel 적용</title>
+        <description>&lt;p&gt;바벨 공식 문서를 보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Babel is a JavaScript compiler. Use next generation JavaScript, today.&lt;/code&gt; 라고 적혀있다.
+바벨은 다음 버전의 자바스크립트 문법을 현재 사용가능한 문법으로 변환 시켜주는 역할을 한다. ES6 부터 자바스크립트 문법에 많은 변화가 있었는데 브라우저는 해당 문법을 이해하지 못하기 때문에 babel 을 거쳐 브라우저가 사용가능한 문법으로 변환 시켜주어야 한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;babel-적용&quot;&gt;babel 적용&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;STEP 1
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install @babel/node
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;STEP 2
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install @babel/preset-env
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;최신바벨 중에서 가장 검증된..? 최신바벨&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;STEP 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;.babelrc 파일 생성 후 아래와 같이 작성&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;presets&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;@babel/preset-env&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 설치한 패키지 명시&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;STEP 4&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;babel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// node index.js 를 대체&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;라고 치기 귀찮으니까 script 를 작성해주자.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;start&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;babel-node index.js&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;실행!&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;에러가 발생한다..&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error: Cannot find module '@babel/core'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;없다고 하니까 설치해보자&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install @babel/core
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이상 es6 문법이 문제 없이 동작한다.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 23 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2017/10/23/babel-apply/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/23/babel-apply/</guid>
+        
+        <category>node</category>
         
         
       </item>
