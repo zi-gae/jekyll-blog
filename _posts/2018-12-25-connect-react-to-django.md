@@ -37,17 +37,19 @@ package.json
 ### Connecting django to React
 
 #### 1. proxy the request from 3000 to 8000
+
 * proxy 를 :3000 에서 :8000으로 보냄 (react)
+  
 #### 2. install django-cors-headers
+
 * 보안상의 문제 없이 Ajax등의 통신을 하기 위해 사용되는 메커니즘이 CORS임
-  
 * Django 는 기본적으로 외부에서의 요청을 막음
-  
 * CORS 표준은 웹 브라우저가 사용하는 정보를 읽을 수 있도록 허가된 출처 집합를 서버에게 알려주도록 허용하는 HTTP 헤더를 추가함으로써 동작
+```
+pip install django-cors-headers
+```
 
-    > pip install django-cors-headers
-
-    [참조](http://recordingbetter.com/2017/08/07/Django-CORS)
+[참조](http://recordingbetter.com/2017/08/07/Django-CORS)
 
 
 #### 3. Add 'corsheaders' to INSTALL_APPS
@@ -61,7 +63,9 @@ INSTALLED_APPS = [
     ...
 ]
 ```
+
 #### 4. Add 'corsheaders.middleware.CoreMiddleware' before 'CommonnMiddleware'
+
 ```python
 MIDDLEWARE = [
     ...,
@@ -72,16 +76,20 @@ MIDDLEWARE = [
 ```
 
 #### 5. Add CORS_ORIGIN_ALLOW_ALL = True on base settings
-base.py or settings.py
+
+`base.py or settings.py`
+
 ```python
 ...
 CORS_ORIGIN_ALLOW_ALL을 = True
 ```
 
 #### 6. Make Djagno load the bunndles as static files with 'str(ROOT_DIR.path('fronted','build','static'))'
+
 django 가 번들을 static file (js, css...) 을 로딩하게 해야한다.
 
-base.py or settings.py
+`base.py or settings.py`
+
 ```python
 STATICFILES_DIRS = [
     str(APPS_DIR.path("static")),
@@ -90,9 +98,13 @@ STATICFILES_DIRS = [
 ```
 
 #### 7. Create a views.py file on [root] folder
+
 `views.py`
+
 #### 8. Create ReactAppView that read the file.
+
 `views.py `
+
 ```python
 import os
 from django.views.generic import View
@@ -115,7 +127,9 @@ class ReactAppView(View):
             )
 
 ```
+
 #### 9.  Add the ReactAppView as a URL
+
 ```python
 urlpatterns = [
     ...,
