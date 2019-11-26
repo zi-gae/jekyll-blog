@@ -3,38 +3,123 @@ layout: post
 title: "Connect React to Django"
 date: 2017-10-23
 description: 
-image: /assets/images/placeholder-9.jpg
+image: /assets/images/django-logo.png
 author: Jeong geonwoo
 tags: 
   - Dummy Text
   - Moon Drinking
   - Kale
 ---
-Etsy squid occupy pop-up. Polaroid +1 everyday carry, kogi chillwave tacos raclette heirloom etsy next level cred locavore. Blog street art DIY, pug crucifix asymmetrical chicharrones. Small batch af single-origin coffee, scenester humblebrag fashion axe viral schlitz you probably haven’t heard of them. Kickstarter synth poutine brunch hoodie. Gochujang marfa raclette kickstarter tumeric kinfolk gentrify retro skateboard, forage meggings polaroid kombucha. Tilde mlkshk fam meggings.
+### React Proxy Setting
 
-* Actually YOLO marfa tofu shabby chic snackwave. Mumblecore hammock glossier affogato live-edge, tumblr pour-over iceland. Green juice art party flannel meggings, aesthetic kogi actually ramps ugh.
-* Church-key crucifix messenger bag health goth
-* Try-hard artisan direct trade
-* Cold-pressed selfies
+django 에서 만든 api 를 react 에서 호출하기 위해서는 react 에서 proxy 설정을 해주어야 한다. django 는 :8000 번에 위치하고 react 는 :3000 번에 위치하기 때문이다.
+예로
 
-1. Actually YOLO marfa tofu shabby chic snackwave. Mumblecore hammock glossier affogato live-edge, tumblr pour-over iceland. Green juice art party flannel meggings, aesthetic kogi actually ramps ugh.
-2. Church-key crucifix messenger bag health goth
-3. Try-hard artisan direct trade
-4. Cold-pressed selfies
+```
+localhost:3000/users/chagepassword
+```
 
-### Subway tile
-Knausgaard readymade williamsburg tote bag taxidermy, DIY meditation copper mug. Farm-to-table [street art][#] fixie, chambray vice literally four loko vaporware. Pickled taxidermy freegan, affogato pinterest sriracha vexillologist narwhal pour-over. Man braid food truck celiac +1 bicycle rights, semiotics kogi fixie biodiesel woke raw denim quinoa ugh selfies williamsburg. Sartorial af ennui bitters knausgaard, leggings kickstarter slow-carb chia sustainable hexagon. Prism 3 wolf moon occupy ramps wayfarers tumblr narwhal 90’s. Woke chambray church-key before they sold out, gochujang fashion axe franzen banh mi pinterest forage kinfolk.
+라는 url 이 있으면 react 는 :3000번 이기 때문에 해당 url 을 찾지 못한다. 하지만 이때 proxy 를 :8000 으로 설정을 해두면 우선적으로 localhost:3000/users/chagepassword 을 찾고 존재하지 않으면 localhost:8000/users/chagepassword 에서 찾는다.
 
-![Placeholder](/assets/images/placeholder-2.jpg)
+package.json
 
-Meh food truck tofu succulents, literally waistcoat skateboard poke pop-up cold-pressed put a bird on it cliche umami cornhole kale chips. Man braid 8-bit irony selvage, butcher blog everyday carry. Af meggings tacos ugh la croix skateboard. Biodiesel paleo prism kombucha seitan drinking vinegar. Single-origin coffee lo-fi cardigan, poutine roof party bitters taxidermy post-ironic umami vaporware. Austin edison bulb leggings cliche. Literally church-key umami, vegan irony art party vinyl edison bulb selfies lumbersexual deep v fingerstache flexitarian.
+```javascript
+{
+  ...,
+  "proxy": "http://localhost:8000",
+  ...
+}
+```
 
-> Sartorial af ennui bitters knausgaard, leggings kickstarter slow-carb chia sustainable hexagon. Prism 3 wolf moon occupy ramps wayfarers tumblr narwhal 90's.
-> <cite>Man braid</cite>
+위와 같이 설정
 
-#### Subway tile
-Slow-carb cornhole crucifix thundercats intelligentsia. Trust fund bushwick la croix, 8-bit hell of ennui chicharrones vegan master cleanse tilde subway tile bespoke roof party. Next level celiac bushwick coloring book subway tile. Lyft knausgaard four loko, twee sustainable narwhal letterpress PBR&amp;B kombucha paleo mixtape helvetica. Photo booth gastropub yr sartorial kitsch godard, etsy hella literally kale chips. Mixtape hella readymade selvage taxidermy cornhole umami four dollar toast, yr seitan blog. Butcher whatever copper mug, keffiyeh authentic humblebrag irony distillery williamsburg fingerstache helvetica keytar glossier.
 
-Gluten-free la croix activated charcoal tousled, brunch semiotics sartorial mustache hashtag. Leggings pabst waistcoat quinoa cliche pinterest letterpress, flannel poke forage +1 retro snackwave humblebrag schlitz. Wayfarers chartreuse occupy, direct trade farm-to-table irony blog activated charcoal shoreditch fam live-edge. Intelligentsia scenester gochujang gentrify portland offal. Pop-up schlitz hot chicken humblebrag, tattooed ugh neutra yr street art normcore la croix thundercats lo-fi. Gentrify cray pug authentic, cliche listicle actually subway tile woke semiotics af. Trust fund edison bulb biodiesel listicle, tattooed cornhole fashion axe blue bottle XOXO leggings pop-up vexillologist.
+### Connecting django to React
 
-Pinterest cold-pressed selfies man bun twee williamsburg irony, art party snackwave tumeric knausgaard marfa polaroid chambray. PBR&amp;B semiotics selvage brooklyn hexagon cray. Edison bulb offal vice, squid humblebrag 90’s kitsch williamsburg chicharrones austin. Poke 3 wolf moon selfies banh mi farm-to-table raclette. +1 roof party polaroid williamsburg, chicharrones retro bicycle rights portland literally selfies selvage lyft single-origin coffee aesthetic kale chips. Blog yr la croix four loko beard. Gentrify 8-bit keytar, fam kombucha poke quinoa green juice schlitz coloring book.
+#### 1. proxy the request from 3000 to 8000
+* proxy 를 :3000 에서 :8000으로 보냄 (react)
+#### 2. install django-cors-headers
+* 보안상의 문제 없이 Ajax등의 통신을 하기 위해 사용되는 메커니즘이 CORS임
+  
+* Django 는 기본적으로 외부에서의 요청을 막음
+  
+* CORS 표준은 웹 브라우저가 사용하는 정보를 읽을 수 있도록 허가된 출처 집합를 서버에게 알려주도록 허용하는 HTTP 헤더를 추가함으로써 동작
+
+    > pip install django-cors-headers
+
+    [참조](http://recordingbetter.com/2017/08/07/Django-CORS)
+
+
+#### 3. Add 'corsheaders' to INSTALL_APPS
+
+[참조](https://pypi.org/project/django-cors-headers/)
+
+```python
+INSTALLED_APPS = [
+    ...,
+    INSTALLED_APPS,
+    ...
+]
+```
+#### 4. Add 'corsheaders.middleware.CoreMiddleware' before 'CommonnMiddleware'
+```python
+MIDDLEWARE = [
+    ...,
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    ...
+]
+```
+
+#### 5. Add CORS_ORIGIN_ALLOW_ALL = True on base settings
+base.py or settings.py
+```python
+...
+CORS_ORIGIN_ALLOW_ALL을 = True
+```
+
+#### 6. Make Djagno load the bunndles as static files with 'str(ROOT_DIR.path('fronted','build','static'))'
+django 가 번들을 static file (js, css...) 을 로딩하게 해야한다.
+
+base.py or settings.py
+```python
+STATICFILES_DIRS = [
+    str(APPS_DIR.path("static")),
+    str("/Users/user/Documents/git_repo/cafeteria_front/build/static"),
+]
+```
+
+#### 7. Create a views.py file on [root] folder
+`views.py`
+#### 8. Create ReactAppView that read the file.
+`views.py `
+```python
+import os
+from django.views.generic import View
+from django.http import HttpResponse
+from django.conf import settings
+
+
+class ReactAppView(View):
+
+    def get(self, request):
+        try:
+            with open(os.path.join("[path to react root folder]", "build", "index.html")) as file:
+                return HttpResponse(file.read())
+        except:
+            return HttpResponse(
+                """
+                index.html not found!! build your react app
+                """,
+                status=501
+            )
+
+```
+#### 9.  Add the ReactAppView as a URL
+```python
+urlpatterns = [
+    ...,
+    ...,
+    path("", views.ReactAppView.as_view()),
+]
+```
