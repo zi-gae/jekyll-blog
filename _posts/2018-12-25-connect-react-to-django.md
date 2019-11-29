@@ -2,14 +2,14 @@
 layout: post
 title: "Connect React to Django"
 date: 2017-10-23
-description: 
+description:
 image: /assets/images/django-logo.png
 author: Jeong geonwoo
-tags: 
-  - Dummy Text
-  - Moon Drinking
-  - Kale
+tags:
+  - django
+  - react
 ---
+
 ### React Proxy Setting
 
 django 에서 만든 api 를 react 에서 호출하기 위해서는 react 에서 proxy 설정을 해주어야 한다. django 는 :8000 번에 위치하고 react 는 :3000 번에 위치하기 때문이다.
@@ -33,28 +33,29 @@ package.json
 
 위와 같이 설정
 
-
 ### Connecting django to React
 
 #### 1. proxy the request from 3000 to 8000
 
-* proxy 를 :3000 에서 :8000으로 보냄 (react)
-  
+&nbsp; - proxy 를 :3000 에서 :8000으로 보냄 (react)
+
 #### 2. install django-cors-headers
 
-* 보안상의 문제 없이 Ajax등의 통신을 하기 위해 사용되는 메커니즘이 CORS임
-* Django 는 기본적으로 외부에서의 요청을 막음
-* CORS 표준은 웹 브라우저가 사용하는 정보를 읽을 수 있도록 허가된 출처 집합를 서버에게 알려주도록 허용하는 HTTP 헤더를 추가함으로써 동작
+&nbsp; - 보안상의 문제 없이 Ajax등의 통신을 하기 위해 사용되는 메커니즘이 CORS임
+
+&nbsp; - Django 는 기본적으로 외부에서의 요청을 막음
+
+&nbsp; - CORS 표준은 웹 브라우저가 사용하는 정보를 읽을 수 있도록 허가된 출처 집합를 서버에게 알려주도록 허용하는 HTTP 헤더를 추가함으로써 동작
+
 ```
 pip install django-cors-headers
 ```
 
-[참조](http://recordingbetter.com/2017/08/07/Django-CORS)
-
+&nbsp; [참조](http://recordingbetter.com/2017/08/07/Django-CORS)
 
 #### 3. Add 'corsheaders' to INSTALL_APPS
 
-[참조](https://pypi.org/project/django-cors-headers/)
+&nbsp; [참조](https://pypi.org/project/django-cors-headers/)
 
 ```python
 INSTALLED_APPS = [
@@ -103,7 +104,7 @@ STATICFILES_DIRS = [
 
 #### 8. Create ReactAppView that read the file.
 
-`views.py `
+`views.py`
 
 ```python
 import os
@@ -128,7 +129,7 @@ class ReactAppView(View):
 
 ```
 
-#### 9.  Add the ReactAppView as a URL
+#### 9. Add the ReactAppView as a URL
 
 ```python
 urlpatterns = [

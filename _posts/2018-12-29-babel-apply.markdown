@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "최신 babel 적용"
-date: 2017-10-23
-description: 
+date: 2018-12-29
+description:
 image: /assets/images/babel.png
 author: Jeong geonwoo
-tags: 
+tags:
   - node
 ---
 
@@ -14,18 +14,21 @@ tags:
 
 #### babel 적용
 
-* STEP 1
+- STEP 1
+
 ```
 npm install @babel/node
 ```
-* STEP 2
+
+- STEP 2
+
 ```
 npm install @babel/preset-env
 ```
 
 최신바벨 중에서 가장 검증된..? 최신바벨
 
-* STEP 3
+- STEP 3
 
 .babelrc 파일 생성 후 아래와 같이 작성
 
@@ -35,7 +38,7 @@ npm install @babel/preset-env
 }
 ```
 
-* STEP 4
+- STEP 4
 
 ```javascript
 babel-node index.js // node index.js 를 대체
@@ -68,6 +71,3 @@ npm install @babel/core
 ```
 
 이상 es6 문법이 문제 없이 동작한다.
-    
-
-
