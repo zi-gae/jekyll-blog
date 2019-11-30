@@ -1,0 +1,138 @@
+---
+layout: post
+title: "django AWS 배포"
+date: 2019-05-21
+description:
+image: /assets/images/aws_logo.jpg
+author: Jeong geonwoo
+tags:
+  - aws
+  - ec2
+  - s3
+---
+
+## AWS django 배포 방법 (for osX, mac)
+
+<br/>
+
+#### AWS EC2 인스턴스 생성
+
+<br/>
+
+&nbsp; 환경 구축하기
+  
+&nbsp; 1. 아마존 웹 서비스 [이동](https://aws.amazon.com)
+
+&nbsp; 2. 로그인 후 서비스에서 EC2를 클릭하여 EC2 인스턴스 생성 페이지로 이동한다.
+
+&nbsp; 3. 아래의 버튼을 통해 인스턴스를 생성한다.
+
+![](/assets/images/aws_instance.png)
+
+인스턴스 설정은 다음과 같다.
+
+• Ubuntu Server 18.04로 생성
+
+• 유형 t2.micro (프리티어) 선택 후, "다음:인스턴스 세부 정보 구성" 클릭
+
+• "다음: 스토리지 추가" 클릭
+
+• Storage 20GB (최대 30GB까지 무료) "다음: 태그 추가" 클릭
+
+• 다음: 보안 그룹 구성” 클릭
+
+• 보안 그룹 규칙에서 규칙 추가(HTTP, HTTPS) 추가, 사용자 지정TCP 8000(장고 포트) 포트 추가 후 전부 위치무관으로 변경
+
+<br/>
+
+##### 설정이 완료되면 아래 사진과 같이 서버 접속을 위한 마스터 키가 되어주는
+##### pem 확장자의 파일을 받는다.
+
+<br/>
+
+![](/assets/images/aws_pem.png)
+
+<br/>
+
+##### 탄력적 IP로 이동하여 새 주소를 할당 할당된 IP를 인스턴스에 연결하면 서버 초기 설정이 완료된다.
+
+<br/>
+
+![](/assets/images/aws_newip.png)
+
+
+맥에서 터미널을 열고 다운로드 받은 pem 파일이 Downloads 폴더에 있고 pem 이름을 aws_sample.pem으로 가정하고 진행
+
+	$ chomd 400 ~/Downloads aws_sample.pem
+	$ mv ~/Downloads aws_sample.pem ~/.ssh/
+	$ ssh –I ~/.ssh aws_sample.pem ubuntu@[퍼블릭 DNS] 
+    
+퍼블릭 DNS는 인스턴스 정보에서 퍼블릭 DNS를 복사하면 됨
+
+![](/assets/images/aws_publicdns.png)
+
+접속 후 서버 인스턴스의 ssh 터미널에서 다음 순서로 명령어를 입력
+
+`Django` 실행을 위한 기본적인 서버 구성요소와 `python3`을 설치
+
+    $ sudo apt-get update
+    $ sudo apt-get install build-essential
+    $ sudo apt-get install python3
+    $ sudo apt-get install python3-pip
+    $ sudo pip3 install --upgrade pip
+
+---
+
+Github에 접속하기 위한 ssh-key를 먼저 생성
+
+    $ ssh-keygen -t rsa
+    $ cat /home/ubuntu/.ssh/id_rsa.pub
+
+---
+
+출력된 문자열을 복사 후에 깃 레포지토리 설정 화면에서 deploy key 메뉴에 복사한 내용을 key에 입력
+
+![](/assets/images/aws_gitkey.png)
+
+`Title`은 임의 값으로 하면 되고, `key`값은 위에서 복사한 `key`문자열 값
+
+---
+
+`Github`에서 소스코드를 내려받기
+
+    $ mkdir [폴더명]
+    $ cd 생성한 [풀더명]
+    $ git clone [clone ssh 주소]
+
+`git ssh` 주소는 `github` 에서  Clone or download 드롭다운 메뉴 안에 Use SSH 링크를 클릭하면 `git@` 으로 시작하는 ssh주소가 뜹니다.
+
+![](/assets/images/aws_gitssh.png)
+
+---
+
+`virtualenv`로 필요한 라이브러리 환경을 구성한다.
+
+    $ cd {프로젝트 폴더명}
+    $ sudo apt-get install virtualenv
+    $ virtualenv -p python3 venv
+    $ source venv/bin/activate #virtualenv 환경으로 진입
+    $ pip install -r requirements.txt
+
+
+이제 장고 웹 앱을 실행시켜봅시다.
+
+    $ python manage.py runserver 0.0.0.0:8000
+
+이제 `aws`탄력적 ip로 웹 브라우저에 입력해서 접속 가능
+
+<br/>
+
+<br/> 
+
+<br/>
+
+<br/>
+
+<br/>
+
+##### 게시글이 길어져 S3 연동은 다음 [게시글]()에서 진행

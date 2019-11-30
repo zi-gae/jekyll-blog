@@ -6,7 +6,9 @@ description:
 image: /assets/images/virtual_serial_port.png
 author: Jeong geonwoo
 tags:
-  - Kale
+  - rs232
+  - node
+  - serial port
 ---
 
 ## Node.js 가상포트로 시리얼 통신 ( Mac )

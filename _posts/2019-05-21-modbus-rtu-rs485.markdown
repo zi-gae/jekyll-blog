@@ -6,9 +6,10 @@ description:
 image: /assets/images/crc.png
 author: Jeong geonwoo
 tags:
-  - Dummy Text
-  - Moon Drinking
-  - Kale
+  - crc
+  - rs232
+  - rs485
+  - modbus
 ---
 
 ## 외경 측정기
@@ -23,8 +24,8 @@ tags:
 
 <br/>
 
-|      start       |     slave addr      |    comand code    |       data content        |          CRC Check          |         end         |
-| :--------------: | :-----------------: | :---------------: | :-----------------------: | :-------------------------: | :-----------------: |
+|    start    |    slave addr     |    comand code    |    data content     |         CRC Check         |      end      |
+| :---------: | :---------------: | :---------------: | :-----------------: | :-----------------------: | :-----------: |
 | 10ms 텀으로 구분 | **8bit** 범위 0~247 | **8bit** 03H, 10H | **n\*8bit** 하단에서 설명 | **16bit** [참조](naver.com) | 10ms 텀을 주고 구분 |
 
     위와 같은 데이터 포맷을 가진다.
@@ -33,16 +34,16 @@ tags:
 
 ## Request
 
-|           요청 필드 명           | 예제 값(16진수) |
-| :------------------------------: | :-------------: |
-|        <b>Slave addr</b>         |    <b>01</b>    |
-|       <b>Command code</b>        |    <b>03</b>    |
-|   <b>start addr high byte</b>    |    <b>00</b>    |
-|    <b>start addr low byte</b>    |    <b>06</b>    |
-|   <b>Variable number byte </b>   |    <b>00</b>    |
-| <b>Variable low number byte </b> |    <b>08</b>    |
-|           <b>CRC16</b>           |    <b>-</b>     |
-|           <b>CRC16</b>           |    <b>-</b>     |
+|             요청 필드 명              | 예제 값(16진수) |
+| :------------------------------: | :--------: |
+|        <b>Slave addr</b>         | <b>01</b>  |
+|       <b>Command code</b>        | <b>03</b>  |
+|   <b>start addr high byte</b>    | <b>00</b>  |
+|    <b>start addr low byte</b>    | <b>06</b>  |
+|   <b>Variable number byte </b>   | <b>00</b>  |
+| <b>Variable low number byte </b> | <b>08</b>  |
+|           <b>CRC16</b>           |  <b>-</b>  |
+|           <b>CRC16</b>           |  <b>-</b>  |
 
 <br>
 
@@ -70,20 +71,20 @@ Variable high, low number byte 는 총 몇 바이트를 읽을건지 명시한�
 
     응답 받을 데이터의 범위를 20~40 이라고 가정
 
-|        응답 필드 명        | 예제 값(16진수) |
-| :------------------------: | :-------------: |
-|     <b>Slave addr</b>      |    <b>01</b>    |
-|    <b>Command code</b>     |    <b>03</b>    |
-| <b>addr 0x06 high byte</b> |    <b>18</b>    |
-| <b>addr 0x06 low byte</b>  |    <b>14</b>    |
-| <b>addr 0x07 high byte</b> |    <b>1E</b>    |
-| <b>addr 0x07 low byte</b>  |    <b>19</b>    |
-| <b>addr 0x08 high byte</b> |    <b>23</b>    |
-| <b>addr 0x08 low byte</b>  |    <b>1F</b>    |
-| <b>addr 0x09 high byte</b> |    <b>28</b>    |
-| <b>addr 0x09 low byte</b>  |    <b>24</b>    |
-|        <b>CRC16</b>        |    <b>-</b>     |
-|        <b>CRC16</b>        |    <b>-</b>     |
+|          응답 필드 명           | 예제 값(16진수) |
+| :------------------------: | :--------: |
+|     <b>Slave addr</b>      | <b>01</b>  |
+|    <b>Command code</b>     | <b>03</b>  |
+| <b>addr 0x06 high byte</b> | <b>18</b>  |
+| <b>addr 0x06 low byte</b>  | <b>14</b>  |
+| <b>addr 0x07 high byte</b> | <b>1E</b>  |
+| <b>addr 0x07 low byte</b>  | <b>19</b>  |
+| <b>addr 0x08 high byte</b> | <b>23</b>  |
+| <b>addr 0x08 low byte</b>  | <b>1F</b>  |
+| <b>addr 0x09 high byte</b> | <b>28</b>  |
+| <b>addr 0x09 low byte</b>  | <b>24</b>  |
+|        <b>CRC16</b>        |  <b>-</b>  |
+|        <b>CRC16</b>        |  <b>-</b>  |
 
 <br/>
 

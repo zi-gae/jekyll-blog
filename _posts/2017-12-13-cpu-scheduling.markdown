@@ -6,8 +6,9 @@ description:
 image: /assets/images/cpu_kinds.png
 author: Jeong geonwoo
 tags:
-  - react
-  - redux
+  - simulator
+  - cpu
+  - os
 ---
 
 ## CPU Scheduling Simulator

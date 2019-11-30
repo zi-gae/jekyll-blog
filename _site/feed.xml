@@ -6,9 +6,154 @@
 </description>
     <link>http://localhost:4000</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 29 Nov 2019 19:04:44 +0900</pubDate>
-    <lastBuildDate>Fri, 29 Nov 2019 19:04:44 +0900</lastBuildDate>
+    <pubDate>Fri, 29 Nov 2019 22:45:39 +0900</pubDate>
+    <lastBuildDate>Fri, 29 Nov 2019 22:45:39 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>django AWS 배포</title>
+        <description>&lt;h2 id=&quot;aws-django-배포-방법-for-osx-mac&quot;&gt;AWS django 배포 방법 (for osX, mac)&lt;/h2&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;aws-ec2-인스턴스-생성&quot;&gt;AWS EC2 인스턴스 생성&lt;/h4&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;  환경 구축하기&lt;/p&gt;
+
+&lt;p&gt;  1. 아마존 웹 서비스 &lt;a href=&quot;https://aws.amazon.com&quot;&gt;이동&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;  2. 로그인 후 서비스에서 EC2를 클릭하여 EC2 인스턴스 생성 페이지로 이동한다.&lt;/p&gt;
+
+&lt;p&gt;  3. 아래의 버튼을 통해 인스턴스를 생성한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws_instance.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;인스턴스 설정은 다음과 같다.&lt;/p&gt;
+
+&lt;p&gt;• Ubuntu Server 18.04로 생성&lt;/p&gt;
+
+&lt;p&gt;• 유형 t2.micro (프리티어) 선택 후, “다음:인스턴스 세부 정보 구성” 클릭&lt;/p&gt;
+
+&lt;p&gt;• “다음: 스토리지 추가” 클릭&lt;/p&gt;
+
+&lt;p&gt;• Storage 20GB (최대 30GB까지 무료) “다음: 태그 추가” 클릭&lt;/p&gt;
+
+&lt;p&gt;• 다음: 보안 그룹 구성” 클릭&lt;/p&gt;
+
+&lt;p&gt;• 보안 그룹 규칙에서 규칙 추가(HTTP, HTTPS) 추가, 사용자 지정TCP 8000(장고 포트) 포트 추가 후 전부 위치무관으로 변경&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;설정이-완료되면-아래-사진과-같이-서버-접속을-위한-마스터-키가-되어주는&quot;&gt;설정이 완료되면 아래 사진과 같이 서버 접속을 위한 마스터 키가 되어주는&lt;/h5&gt;
+&lt;h5 id=&quot;pem-확장자의-파일을-받는다&quot;&gt;pem 확장자의 파일을 받는다.&lt;/h5&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws_pem.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;탄력적-ip로-이동하여-새-주소를-할당-할당된-ip를-인스턴스에-연결하면-서버-초기-설정이-완료된다&quot;&gt;탄력적 IP로 이동하여 새 주소를 할당 할당된 IP를 인스턴스에 연결하면 서버 초기 설정이 완료된다.&lt;/h5&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws_newip.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;맥에서 터미널을 열고 다운로드 받은 pem 파일이 Downloads 폴더에 있고 pem 이름을 aws_sample.pem으로 가정하고 진행&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ chomd 400 ~/Downloads aws_sample.pem
+$ mv ~/Downloads aws_sample.pem ~/.ssh/
+$ ssh –I ~/.ssh aws_sample.pem ubuntu@[퍼블릭 DNS] 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;퍼블릭 DNS는 인스턴스 정보에서 퍼블릭 DNS를 복사하면 됨&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws_publicdns.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;접속 후 서버 인스턴스의 ssh 터미널에서 다음 순서로 명령어를 입력&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Django&lt;/code&gt; 실행을 위한 기본적인 서버 구성요소와 &lt;code class=&quot;highlighter-rouge&quot;&gt;python3&lt;/code&gt;을 설치&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get update
+$ sudo apt-get install build-essential
+$ sudo apt-get install python3
+$ sudo apt-get install python3-pip
+$ sudo pip3 install --upgrade pip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Github에 접속하기 위한 ssh-key를 먼저 생성&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh-keygen -t rsa
+$ cat /home/ubuntu/.ssh/id_rsa.pub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;출력된 문자열을 복사 후에 깃 레포지토리 설정 화면에서 deploy key 메뉴에 복사한 내용을 key에 입력&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws_gitkey.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Title&lt;/code&gt;은 임의 값으로 하면 되고, &lt;code class=&quot;highlighter-rouge&quot;&gt;key&lt;/code&gt;값은 위에서 복사한 &lt;code class=&quot;highlighter-rouge&quot;&gt;key&lt;/code&gt;문자열 값&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Github&lt;/code&gt;에서 소스코드를 내려받기&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir [폴더명]
+$ cd 생성한 [풀더명]
+$ git clone [clone ssh 주소]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git ssh&lt;/code&gt; 주소는 &lt;code class=&quot;highlighter-rouge&quot;&gt;github&lt;/code&gt; 에서  Clone or download 드롭다운 메뉴 안에 Use SSH 링크를 클릭하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;git@&lt;/code&gt; 으로 시작하는 ssh주소가 뜹니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws_gitssh.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;virtualenv&lt;/code&gt;로 필요한 라이브러리 환경을 구성한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd {프로젝트 폴더명}
+$ sudo apt-get install virtualenv
+$ virtualenv -p python3 venv
+$ source venv/bin/activate #virtualenv 환경으로 진입
+$ pip install -r requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 장고 웹 앱을 실행시켜봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ python manage.py runserver 0.0.0.0:8000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 &lt;code class=&quot;highlighter-rouge&quot;&gt;aws&lt;/code&gt;탄력적 ip로 웹 브라우저에 입력해서 접속 가능&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;게시글이-길어져-s3-연동은-다음-게시글에서-진행&quot;&gt;게시글이 길어져 S3 연동은 다음 &lt;a href=&quot;&quot;&gt;게시글&lt;/a&gt;에서 진행&lt;/h5&gt;
+</description>
+        <pubDate>Tue, 21 May 2019 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2019/05/21/aws/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/05/21/aws/</guid>
+        
+        <category>aws</category>
+        
+        <category>ec2</category>
+        
+        <category>s3</category>
+        
+        
+      </item>
     
       <item>
         <title>Node virtual serial port for OSX</title>
@@ -110,10 +255,14 @@
 &lt;p&gt; - &lt;a href=&quot;https://serialport.io/docs/guide-usage&quot;&gt;serialport&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 21 May 2019 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/2019/05/21/node-virtual-serial-port/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/05/21/node-virtual-serial-port/</guid>
+        <link>http://localhost:4000/2019/05/21/node-virtual-serial-port-copy/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/05/21/node-virtual-serial-port-copy/</guid>
         
-        <category>Kale</category>
+        <category>rs232</category>
+        
+        <category>node</category>
+        
+        <category>serial port</category>
         
         
       </item>
@@ -346,11 +495,13 @@
         <link>http://localhost:4000/2019/05/21/modbus-rtu-rs485/</link>
         <guid isPermaLink="true">http://localhost:4000/2019/05/21/modbus-rtu-rs485/</guid>
         
-        <category>Dummy Text</category>
+        <category>crc</category>
         
-        <category>Moon Drinking</category>
+        <category>rs232</category>
         
-        <category>Kale</category>
+        <category>rs485</category>
+        
+        <category>modbus</category>
         
         
       </item>
@@ -1065,9 +1216,11 @@ request 객체에 cookies 속성이 부여된다.&lt;/p&gt;
         <link>http://localhost:4000/2017/12/13/cpu-scheduling/</link>
         <guid isPermaLink="true">http://localhost:4000/2017/12/13/cpu-scheduling/</guid>
         
-        <category>react</category>
+        <category>simulator</category>
         
-        <category>redux</category>
+        <category>cpu</category>
+        
+        <category>os</category>
         
         
       </item>
