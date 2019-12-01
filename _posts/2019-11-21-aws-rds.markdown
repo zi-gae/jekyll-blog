@@ -1,0 +1,104 @@
+---
+layout: post
+title: "django AWS 배포 - RDS"
+date: 2019-11-21
+description: django rds
+image: /assets/images/aws_rds/aws_rds_postgresql.svg
+author: Jeong geonwoo
+tags:
+  - aws
+  - ec2
+  - s3
+---
+
+## AWS django 배포 방법 3 - rds(for osX, mac)
+
+<br/>
+
+본게시글은 이어지는 게시글입니다.
+
+이전 [게시글](/2019/11/21/aws-3s/)
+
+<br/>
+
+<br/>
+
+#### AWS 버킷 생성
+  
+&nbsp; 1. 아마존 웹 서비스 [이동](https://aws.amazon.com)
+
+&nbsp; 2. 로그인 후 서비스에서 `RDS`를 클릭
+
+&nbsp; 3. RDS 페이지에서 데이터베이스 생성하기 위해 `데이터베이스 생성` 클릭
+
+![](/assets/images/aws_rds/aws_rds_create_db.png)
+
+&nbsp; 4. 엔진 옵션 `PostgreSQL` 선택
+
+![](/assets/images/aws_rds/aws_rds_choice_db.png)
+
+&nbsp; 5. 프리티어 선택 *프로덕션 선택 시 과금 발생*
+
+![](/assets/images/aws_rds/aws_rds_pretier.png)
+
+<br/>
+
+&nbsp; 6. DB 인스턴스 식별자(DB 이름) 마스터 사용자이름, 마스터 암호 설정
+
+![](/assets/images/aws_rds/aws_rds_set_master.png)
+
+&nbsp; 7. 연결에서 `추가 연결 구성` 클릭
+
+![](/assets/images/aws_rds/aws_rds_connect.png)
+
+&nbsp; 8. 기존 VPC 보안 그룹을 인스턴스 그룹으로 연결
+
+![](/assets/images/aws_rds/aws_rds_vpc.png)
+
+&nbsp; 9. 맨 밑에 `데이터베이스 생성`을 클릭하여 생성
+
+![](/assets/images/aws_rds/aws_rds_create2.png)
+
+10. 생성 후 EC2 대시보드에 가서 추가 구성에서 설정한 인스턴스랑 연결됬는지  아래 사진처럼 확인 EC2 대시보드 >> 네트워크 및 보안 탭 보안 그룹 >> 연결한 인스턴스 클릭 >> 인바인드 클릭 >> 편집 >> 소스 입력란에 EC2 그룹 이름 작성하여 연결
+
+![](/assets/images/aws_rds/aws_rds_ec2_connect.png)
+
+---
+
+### Django setting
+
+생성한 DB 인스턴스를 장고 프로젝트에 연결
+
+&nbsp; 1. `base.py` or `settings.py` 를 열어 DATABASES 변수를 아래와 같이 수정
+
+```python
+# settings.py
+# base.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'che1-db.czxnimwgemge.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '5432',
+        'NAME': 'deploy',
+        'USER': 'Che1',
+        'PASSWORD': '*******',
+    }
+}
+```
+
+•	ENGINE: sqlite3를 postgresql로 바꿔준다.
+
+•	HOST: 엔드포인트 항목을 복사-붙여넣기 한다.
+
+•	PORT: 포트 항목을 입력한다.
+
+•	NAME: DB 이름 항목을 입력한다.
+
+•	USER: 사용자 이름 항목을 입력한다.
+
+•	PASSWORD: DB 인스턴스를 생성할 때 설정했던 비밀번호를 입력한다.
+
+
+&nbsp; 2. 각각의 항목에 들어가야할 값을 RDS 인스턴스 화면에서 인스턴스를 체크한 뒤 세부 정보 아이콘을 클릭하여 나타나는 창에서 확인 가능
+
+![](/assets/images/aws_rds/aws_rds_dashbord.png)

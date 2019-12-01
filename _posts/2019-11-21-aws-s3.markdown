@@ -2,7 +2,7 @@
 layout: post
 title: "django AWS 배포 - S3"
 date: 2019-11-21
-description:
+description: django s3 연동하기
 image: /assets/images/aws_s3/aws_s3_main.png
 author: Jeong geonwoo
 tags:
@@ -14,6 +14,13 @@ tags:
 ## AWS django 배포 방법 2 - S3(for osX, mac)
 
 <br/>
+
+본게시글은 이어지는 게시글입니다.
+
+이전 [게시글](/2019/11/20/aws-ec2/)
+
+<br/>
+
 <br/>
 
 #### AWS 버킷 생성
