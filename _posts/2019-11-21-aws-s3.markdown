@@ -3,7 +3,7 @@ layout: post
 title: "django AWS 배포 - S3"
 date: 2019-11-21
 description:
-image: /assets/images/aws_logo.jpg
+image: /assets/images/aws_s3_main.png
 author: Jeong geonwoo
 tags:
   - aws
