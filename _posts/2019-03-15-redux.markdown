@@ -3,7 +3,7 @@ layout: post
 title: "Redux"
 date: 2019-03-15
 description:
-image: /assets/images/redux.png
+image: /assets/images/redux/redux.png
 author: Jeong geonwoo
 tags:
   - react

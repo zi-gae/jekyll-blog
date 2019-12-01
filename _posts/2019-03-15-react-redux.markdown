@@ -3,7 +3,7 @@ layout: post
 title: "React-redux"
 date: 2019-03-15
 description:
-image: /assets/images/react-redux.png
+image: /assets/images/react-redux/react-redux.png
 author: Jeong geonwoo
 tags:
   - react
@@ -24,11 +24,11 @@ tags:
 
 여러 컴포넌트가 리스트 형식으로 모여 있을 경우 각 요소의 컴포넌트를 각각 연결하기에는 비효율적인 면이 있다. 따라서 자식 컴포넌트를 감싸고 있는 하나의 부모 컴포넌트가 대표하여 `connect`하고 `connect`된 해당 컴포넌트를 `Container`라고 한다. `Container`는 가독성을 높이며 다른 컴포넌트와는 디렉토리를 분리하는 것이 효율적이다. React Redux 라이브러리를 코드는 다음과 같다.
 
-![](/assets/images/react_redux_code.png)
+![](/assets/images/react-redux/react_redux_code.png)
 
 위 사진은 `user` 닉네임의 사용여부를 체크하기 위한 코드이다.
 
-![](/assets/images/redux-ducksptrn.png)
+![](/assets/images/react-redux/redux-ducksptrn.png)
 
 위 사진은 `reudx ducks pattern` 으로 작성된 `reducer` 이다. `reudx ducks pattern` 에 대해서 알고 싶으면
 다음 [게시글](/2019-03-15-redux.markdown)을 참고 바란다.

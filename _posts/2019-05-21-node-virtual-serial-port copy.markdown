@@ -3,7 +3,7 @@ layout: post
 title: "Node virtual serial port for OSX"
 date: 2019-05-21
 description:
-image: /assets/images/virtual_serial_port.png
+image: /assets/images/virtual_socat/virtual_serial_port.png
 author: Jeong geonwoo
 tags:
   - rs232
@@ -36,7 +36,7 @@ socat -d -d pty,raw,echo=0 pty,raw,echo=0
 
 아래와 같은 포트가 생성
 
-![socat](/assets/images/socat.png)
+![socat](/assets/images/virtual_socat/socat.png)
 
 #### 2. 가상포트 테스트
 
@@ -58,7 +58,7 @@ echo "TEST Message" > /dev/ttys002
 
 아래와 같이 나오면 가상포트 생성 성공
 
-![result](/assets/images/socat_result.png)
+![result](/assets/images/virtual_socat/socat_result.png)
 
 ## 3. 시리얼 통신 연결
 
@@ -107,7 +107,7 @@ port.on("open", () => {
 
 #### 4. 최종 결과
 
-![code](/assets/images/socat_code.png)
+![code](/assets/images/virtual_socat/socat_code.png)
 
 #### 참고 문서
 

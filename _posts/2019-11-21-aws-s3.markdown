@@ -3,7 +3,7 @@ layout: post
 title: "django AWS 배포 - S3"
 date: 2019-11-21
 description:
-image: /assets/images/aws_s3_main.png
+image: /assets/images/aws_s3/aws_s3_main.png
 author: Jeong geonwoo
 tags:
   - aws
@@ -22,17 +22,17 @@ tags:
 
 &nbsp; 2. 로그인 후 서비스에서 S3를 클릭하여 아래의 버튼을 통해 버킷을 생성
 
-![](/assets/images/aws_s3_bucket.png)
+![](/assets/images/aws_s3/aws_s3_bucket.png)
 
 &nbsp; 3. `버킷 이름`을 입력하고 `리전`을 아시아 태평양(서울)로 지정 후 `다음` 클릭
 
-![](/assets/images/aws_s3_region.png)
+![](/assets/images/aws_s3/aws_s3_region.png)
 
 &nbsp; 4. 옵션 구성은 설정할게없음 `다음` 클릭
 
 &nbsp; 5. 모든 퍼블릭 액세스 차단 체크 되어있으면 해체 후 안에 체크리스트 전부 해제 후 다음 클릭
 
-![](/assets/images/aws_s3_access.png)
+![](/assets/images/aws_s3/aws_s3_access.png)
 
 <br/>
 
@@ -48,20 +48,20 @@ tags:
 
 &nbsp; 2. IAM 페이지로 이동하면 왼쪽에 있는 `사용자` 버튼 클릭
 
-![](/assets/images/aws_s3_leftuser.png)
+![](/assets/images/aws_s3/aws_s3_leftuser.png)
 
 &nbsp; 3. `사용자 추가`버튼 클릭
 
-![](/assets/images/aws_s3_adduser.png)
+![](/assets/images/aws_s3/aws_s3_adduser.png)
 &nbsp; 4. 사용자 이름을 입력하고  액세스 유형은 프로그래밍 방식 엑세스에 체크 `다음:권한`버튼 클릭
 
-![](/assets/images/aws_s3_nextauth.png)
+![](/assets/images/aws_s3/aws_s3_nextauth.png)
 
 <br/>
 
 &nbsp; 5. 사용자에게 권한을 부여하기 위해 `그룹 생성` 버튼 클릭하고 그룹 이름을 입력하고 정책 필터에 s3를 입력하면 나오는 목록에서 AmazonS3FullAccess 체크 후 `그룹 생성` 버튼 클릭
 
-![](/assets/images/aws_s3_creategroup.png)
+![](/assets/images/aws_s3/aws_s3_creategroup.png)
 
 <br/>
 

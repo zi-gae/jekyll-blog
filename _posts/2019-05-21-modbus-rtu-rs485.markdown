@@ -3,7 +3,7 @@ layout: post
 title: "Modbus rtu rs485 / CRC Check"
 date: 2019-05-21
 description:
-image: /assets/images/crc.png
+image: /assets/images/modbus/crc.png
 author: Jeong geonwoo
 tags:
   - crc
@@ -134,4 +134,4 @@ CRC-16-IBM(modbus) 에서는 X<sup>16</sup> + x<sup>15</sup> + x<sup>2</sup> + 1
 
 ### **최종 결과 (serial + crc)**
 
-![](/assets/images/crc_check.gif)
+![](/assets/images/modbus/crc_check.gif)

@@ -3,7 +3,7 @@ layout: post
 title: "CPU Scheduling"
 date: 2017-12-13
 description:
-image: /assets/images/cpu_kinds.png
+image: /assets/images/cpu_scheduling/cpu_kinds.png
 author: Jeong geonwoo
 tags:
   - simulator
@@ -29,21 +29,21 @@ tags:
 
 #### 시작화면
 
-![](/assets/images/cpu_main.png)
+![](/assets/images/cpu_scheduling/cpu_main.png)
 
 <br/>
 
 #### 프로세스 생성
 
-![](/assets/images/createProcess.png)
+![](/assets/images/cpu_scheduling/createProcess.png)
 
 <br/>
 
 #### 다양한 CpuScheduling 기법
 
-![](/assets/images/FCFS.png)
-![](/assets/images/HRN.png)
-![](/assets/images/SJF.png)
+![](/assets/images/cpu_scheduling/FCFS.png)
+![](/assets/images/cpu_scheduling/HRN.png)
+![](/assets/images/cpu_scheduling/SJF.png)
 
 <br/>
 

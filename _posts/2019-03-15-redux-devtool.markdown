@@ -3,7 +3,7 @@ layout: post
 title: "React Devtools"
 date: 2019-03-14
 description:
-image: /assets/images/redux-devtools.png
+image: /assets/images/redux_devtool/redux-devtools.png
 author: Jeong geonwoo
 tags:
   - redux
