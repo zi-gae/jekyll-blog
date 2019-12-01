@@ -13,10 +13,6 @@
 <lastmod>2017-10-23T00:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/2017/10/23/connect-react-to-django/</loc>
-<lastmod>2017-10-23T00:00:00+09:00</lastmod>
-</url>
-<url>
 <loc>http://localhost:4000/2017/10/23/redux-ducks-pattern/</loc>
 <lastmod>2017-10-23T00:00:00+09:00</lastmod>
 </url>
@@ -81,6 +77,10 @@
 <lastmod>2019-05-21T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/2019/11/19/connect-react-to-django/</loc>
+<lastmod>2019-11-19T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/2019/11/20/aws-ec2/</loc>
 <lastmod>2019-11-20T00:00:00+09:00</lastmod>
 </url>
@@ -104,12 +104,6 @@
 <loc>http://localhost:4000/tag/kale/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/tag/django/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/tag/react/</loc>
-</url>
-<url>
 <loc>http://localhost:4000/tag/simulator/</loc>
 </url>
 <url>
@@ -125,6 +119,9 @@
 <loc>http://localhost:4000/tag/redux/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/tag/react/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/tag/crc/</loc>
 </url>
 <url>
@@ -138,6 +135,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/tag/serial-port/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/tag/django/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/tag/aws/</loc>

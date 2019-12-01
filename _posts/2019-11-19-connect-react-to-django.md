@@ -3,7 +3,7 @@ layout: post
 title: "Connect React to Django"
 date: 2019-11-19
 description:
-image: /assets/images/react_django_logo.jpg
+image: /assets/images/connect_django_react/react_django_logo.jpg
 author: Jeong geonwoo
 tags:
   - django

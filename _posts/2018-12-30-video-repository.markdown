@@ -3,7 +3,7 @@ layout: post
 title: "동아리 알고리즘 강좌 사이트"
 date: 2018-12-30
 description:
-image: /assets/images/null-videolecture.png
+image: /assets/images/video_repo/null-videolecture.png
 author: Jeong geonwoo
 tags:
   - node
@@ -25,8 +25,8 @@ tags:
 
 #### 로그인 & 회원가입
 
-![](/assets/images/joinPage.png)
-![](/assets/images/loginPage.png)
+![](/assets/images/video_repo/joinPage.png)
+![](/assets/images/video_repo/loginPage.png)
 
 깃허브와 카카오톡 계정을 이용해서 가입 가능하다.
 
@@ -34,7 +34,7 @@ tags:
 
 #### 회원 승인 페이지
 
-![](/assets/images/userControllPage.png)
+![](/assets/images/video_repo/userControllPage.png)
 
 관리자(만든이)만 접속 가능하며 외부인의 열람을 막기 위해
 승인 절차가 있어야 업로드 및 동영상 열람이 가능하다.
@@ -43,7 +43,7 @@ tags:
 
 #### 동영상 열람
 
-![](/assets/images/mainpage_login.png)
+![](/assets/images/video_repo/mainpage_login.png)
 
 관리자의 승인을 받은 사용자만
 알고리즘 기본 강의를 볼 수 있다.
