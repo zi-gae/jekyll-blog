@@ -3,7 +3,7 @@ layout: post
 title: "최신 babel 적용"
 date: 2018-12-29
 description:
-image: /assets/images/babel.png
+image: /assets/images/babel/babel.png
 author: Jeong geonwoo
 tags:
   - node
