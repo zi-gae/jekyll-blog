@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 01 Dec 2019 19:19:19 +0900</pubDate>
-    <lastBuildDate>Sun, 01 Dec 2019 19:19:19 +0900</lastBuildDate>
+    <pubDate>Sun, 01 Dec 2019 19:28:12 +0900</pubDate>
+    <lastBuildDate>Sun, 01 Dec 2019 19:28:12 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -1342,6 +1342,71 @@ request 객체에 cookies 속성이 부여된다.&lt;/p&gt;
       </item>
     
       <item>
+        <title>django file upload from react</title>
+        <description>&lt;h3 id=&quot;작성중입니다&quot;&gt;작성중입니다.&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 23 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2017/10/23/react-django-fileupload/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/23/react-django-fileupload/</guid>
+        
+        <category>Kale</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>react webpack</title>
+        <description>&lt;h3 id=&quot;작성중입니다&quot;&gt;작성중입니다.&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 23 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2017/10/23/react-webpack/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/23/react-webpack/</guid>
+        
+        <category>Kale</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>redux ducks pattern</title>
+        <description>&lt;h3 id=&quot;작성중입니다&quot;&gt;작성중입니다.&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 23 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2017/10/23/react-router/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/23/react-router/</guid>
+        
+        <category>Kale</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Sass-mixin</title>
+        <description>&lt;h3 id=&quot;작성중입니다&quot;&gt;작성중입니다.&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 23 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2017/10/23/sass-mixin/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/23/sass-mixin/</guid>
+        
+        <category>Kale</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>redux ducks pattern</title>
+        <description>&lt;h3 id=&quot;작성중입니다&quot;&gt;작성중입니다.&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 23 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2017/10/23/redux-ducks-pattern/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/23/redux-ducks-pattern/</guid>
+        
+        <category>Kale</category>
+        
+        
+      </item>
+    
+      <item>
         <title>Connect React to Django</title>
         <description>&lt;h3 id=&quot;react-proxy-setting&quot;&gt;React Proxy Setting&lt;/h3&gt;
 
@@ -1470,6 +1535,45 @@ request 객체에 cookies 속성이 부여된다.&lt;/p&gt;
         <category>django</category>
         
         <category>react</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>SDES Simulator</title>
+        <description>&lt;h3 id=&quot;작성중입니다&quot;&gt;작성중입니다.&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 23 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2017/10/23/sdes-simulator/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/23/sdes-simulator/</guid>
+        
+        <category>Kale</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>React life cycle</title>
+        <description>&lt;h3 id=&quot;작성중입니다&quot;&gt;작성중입니다.&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 23 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2017/10/23/react-life-cycle/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/23/react-life-cycle/</guid>
+        
+        <category>Kale</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>kakao chatbot</title>
+        <description>&lt;h3 id=&quot;작성중입니다&quot;&gt;작성중입니다.&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 23 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2017/10/23/kakaochatbot/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/10/23/kakaochatbot/</guid>
+        
+        <category>Kale</category>
         
         
       </item>
