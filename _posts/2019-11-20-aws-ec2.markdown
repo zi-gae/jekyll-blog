@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "django AWS 배포"
-date: 2019-05-21
+title: "django AWS 배포 - EC2"
+date: 2019-11-20
 description:
 image: /assets/images/aws_logo.jpg
 author: Jeong geonwoo
@@ -11,7 +11,7 @@ tags:
   - s3
 ---
 
-## AWS django 배포 방법 (for osX, mac)
+## AWS django 배포 방법 1 - EC2(for osX, mac)
 
 <br/>
 
@@ -63,9 +63,9 @@ tags:
 
 맥에서 터미널을 열고 다운로드 받은 pem 파일이 Downloads 폴더에 있고 pem 이름을 aws_sample.pem으로 가정하고 진행
 
-	$ chomd 400 ~/Downloads aws_sample.pem
+	$ chmod 400 ~/Downloads aws_sample.pem
 	$ mv ~/Downloads aws_sample.pem ~/.ssh/
-	$ ssh –I ~/.ssh aws_sample.pem ubuntu@[퍼블릭 DNS] 
+	$ ssh –i ~/.ssh aws_sample.pem ubuntu@[퍼블릭 DNS] 
     
 퍼블릭 DNS는 인스턴스 정보에서 퍼블릭 DNS를 복사하면 됨
 
