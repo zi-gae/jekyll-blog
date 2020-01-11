@@ -93,6 +93,10 @@
 <lastmod>2019-11-21T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/2020/01/10/webpack/</loc>
+<lastmod>2020-01-10T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/404</loc>
 </url>
 <url>
@@ -151,5 +155,11 @@
 </url>
 <url>
 <loc>http://localhost:4000/tag/s3/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/tag/webpack/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/tag/babel/</loc>
 </url>
 </urlset>

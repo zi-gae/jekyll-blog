@@ -1,0 +1,75 @@
+---
+layout: post
+title: "WEBPACK BASIC"
+date: 2020-01-10
+description: webpack 기본 이해하기
+image: /assets/images/webpack/webpack.png
+author: Jeong geonwoo
+tags:
+  - webpack
+  - babel
+---
+
+# WEBPACK 설정
+
+```javascript
+var path = require("path");
+var webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
+module.exports = {
+  entry: "./index",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
+    //dist 폴더의 bundle.js 파일로 결과를 저장할 것이다.
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: "bael-loader",
+        options: {
+          presets: ["@babel/preset-env"]
+        }
+      }
+    ]
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()]
+  }
+};
+```
+
+`entry` 은 웹팩이 빌드할 파일을 알려주는 역할을 한다.
+위처럼 작성하면 `./index.js` 파일 기준으로 import 되어 있는 모든 파일들을 찾아 하나의 파일로 합친다.
+
+`output` 은 웹팩에서 빌드를 완료하면 `output` 에 명시되어 있는 정보를 통해 빌드 파일을 생성합니다.
+
+결론: `entry` 에서 `module` 을 적용 후 `output` 으로 나온다.
+
+```javascript
+module : {
+    rules: {
+        test: '가지고올 파일 정규식',
+        use: [ // 생략 가능
+            {
+                loader: '사용할 로더 이름',
+                options: { 사용할 로더 옵션 }
+            }
+        ]
+    }
+}
+```
+
+`babel-loader` 는 자주 사용하게 될 로더 옵션 입니다.
+사전에 작업한 `.babelrc` 를 참고하여 es6 를 es5 로 변환해주고 또는 아래 처럼 `babelrc` 값을 줄 수 있다.
+
+```
+options: {
+    presets: ["@babel/preset-env"]
+}
+```
+
+    미완성 포스트입니다.
+    공부하여 내용 추가 할 예정
