@@ -3,7 +3,7 @@ layout: post
 title: "WEBPACK BASIC"
 date: 2020-01-10
 description: webpack 기본 이해하기
-image: /assets/images/webpack/webpack.jpeg
+image: /assets/images/hooks_rules/reactLint.png
 author: Jeong geonwoo
 tags:
   - webpack
@@ -93,7 +93,7 @@ module.exports = {
 
 결론: `entry` 에서 `module` 을 적용 후 `output` 으로 나온다.
 
----
+---f
 
 ```javascript
 module : {
