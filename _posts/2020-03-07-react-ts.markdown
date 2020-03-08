@@ -1,0 +1,142 @@
+---
+layout: post
+title: "React with TS + Webpack"
+date: 2020-01-10
+description: webpack 기본 이해하기
+image: /assets/images/react_with_typescript/react_ts.jpeg
+author: Jeong geonwoo
+tags:
+  - webpack
+  - babel
+---
+
+# Typescript 란?
+
+타입스크립트는 자바스크립트를 확장한 언어로, JS 언어의 특성을 침범하지 않고 최신 ECMA 표준을 지원.
+
+ 컴파일 언어, 정적 타입언어
+
+JS는 인터프리터 언어지만, TypeScript는 컴파일언어로 코드 수준에서 미리 타입을 체크하여 오류를 체크해냄. 단 전통적인 컴파일 언어와는 다르게, 링킹 과정이 생략되어 있음.
+낮은 버전의 ECMA 수용
+
+새로운 표준이 반영되더라도 ES5 브라우저에 대응할 수 있는 타입스크립트 컴파일러를 지원.
+
+ECMA 표준을 따른다면 컴파일 도구를 이용해 새로운 언어로 마이그레이션 할 수 있도록 지원
+
+자세한 정보는 구글에 타입스크립트를 검색을 하도록 하자.
+아래 부터는 리액트에 타입스크립트를 적용하는 방법을 알아본다.
+
+---
+
+#### Install Packages  
+  ```
+  yarn add react react-dom
+  
+  yarn add -D @types/react @types/react-dom awesome-typescript-loader webpack webpack-cli html-webpack-plugin
+  ```
+  `@types/react`, `@types/react-dom` React 에서 공식적으로 TS 지원하는게 아니기때문에 커뮤니티에서 제공하는 타이핑이 되어있는 TS 패키지
+
+   `awesome-typescript-loader` TS 대표적인 로더이고 `ts-loader` 도 있다. 본 예제에서는 `awesome-typescript-loader` 를 설치하지만 `ts-loader` 를 설치해도 무방하다.
+
+  `webpack`, `webpack-cli` 파일을 하나로 합치기 위한 웹팩
+
+조금더 자세한 설명은 [여기](2019-12-15-webpack.markdown)
+  
+  `html-webpack-plugin` `webpack` 은 기본적으로 프로젝트 루트 경로의 `index.html` 을 찾는다. 이를 바꿔주기 위해서는 `html-webpack-plugin` 을 웹팩 플러그인으로 추가해줘야한다.
+
+---
+
+#### Set Typescript
+
+
+tsconfig.json 생성
+```
+tsc --init
+```
+
+```json
+//tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["DOM", "ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020"],
+    "types": ["react"],
+    "jsx": "react",
+    "baseUrl": ".",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./node_modules/**/*"]
+}
+
+```
+---
+#### Set Webpack
+```javascript
+// webpack.config.js
+var path = require("path");
+var webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  devtool: "eval", // 실서비스: hidden-source-map
+  resolve: {
+    modules: [path.resolve(__dirname, ".."), "node_modules"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
+  },
+  entry: {
+    app: path.resolve(__dirname, "../src")
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        loader: "awesome-typescript-loader"
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, "../public/index.html"),
+      inject: true
+    })
+  ],
+};
+```
+웹팩에 대한 설명은 [여기](2019-12-15-webpack.markdown)
+
+`webpack.config.js` 를 기준으로 각자 파일들의 경로를 작성해준다. 해당 게시글은 아래와 같은 경로를 따른다 
+
+**/config/webapck.config.js**
+
+---
+
+#### React 작성시 주의 해야할 점
+
+지금부터 본인 경로와 파일에 맞춰 리액트를 작성해주면 된다. 이때 주의해야할 점이 있다.
+
+- 파일 확장자
+  - `React+JS` 조합으로 할땐 `js`, `jsx` 확장자를 따로 구분 짓지 않고 `js` 로 통일하여 작성하였는데 `TS` 는 `jsx` 문법을 사용하면 `tsx` 확장자를 이용해야한다.
+
+- `tsconfig.json` 에  `include` 옵션이 없는 경우
+    - `"include": ["./src/**/*"]` 와 같이 추가해주면 된다.
+
+- 프로젝트에 `.ts` 파일이 없는 경우
+    - 습관적으로 `.js`  파일을 만들지는 않았는지 확인
+
+- `document` (window.document) 타입 에러 나는 경우
+   - `compilerOptions` 안에 `lib` 옵션에 "DOM" 이 없으면 타입에러가 난다.
+  
+---
+
+**여기까지 따라왔다면 타입스크립트로 리액트를 작성 하면 된다.**

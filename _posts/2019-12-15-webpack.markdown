@@ -3,7 +3,7 @@ layout: post
 title: "WEBPACK BASIC"
 date: 2020-01-10
 description: webpack 기본 이해하기
-image: /assets/images/hooks_rules/reactLint.png
+image: /assets/images/webpack/webpack.jpeg
 author: Jeong geonwoo
 tags:
   - webpack

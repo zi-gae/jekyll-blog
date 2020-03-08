@@ -1,13 +1,14 @@
 ---
 layout: post
-title: "WEBPACK BASIC"
+title: "eslint error on CRA"
 date: 2020-01-10
-description: webpack 기본 이해하기
-image: /assets/images/webpack/webpack.jpeg
+description: create-react-app eslint
+image: /assets/images/hooks_rules/reactLint.png
 author: Jeong geonwoo
 tags:
   - eslint
-  - hooks
+  - tslint
+  - CRA
 ---
 
 # react-hooks/rules-of-hooks error
