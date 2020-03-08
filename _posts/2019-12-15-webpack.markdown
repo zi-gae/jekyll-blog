@@ -26,9 +26,14 @@ Webpack이 실행된다면 Dependencies Graph를 통해 필요한 형태의 하�
 var path = require("path");
 var webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./index",
+  resolve: {
+    modules: [path.resolve(__dirname, ".."), "node_modules"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
@@ -45,11 +50,25 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, "../public/index.html"),
+      inject: true
+    })
+  ],
   optimization: {
     minimizer: [new UglifyJsPlugin()]
   }
 };
 ```
+
+#### resolve
+
+- 웹팩이 빌드할 파일의 확장자를 결정
+- node_modules 의 파일 위치를 지정해줘야함
+- 위 두가지가 이루어지지 않을 경우 확장자 인식을 못해 에러가 나거나 node_modules 을 찾을 수 없다는 에러가 발생함
+  
+---
 
 #### Entry
 
@@ -75,6 +94,12 @@ module.exports = {
 
 ---
 
+### plugins
+- 웹팩이 빌드 할때 추가할 플러그인
+- 많은 종류의 플러그인이 있다.
+
+---
+
 #### Optimization
 
 - js 코드를 어떻게 압축 할지 명시한다.
@@ -91,9 +116,9 @@ module.exports = {
 
 ---
 
-결론: `entry` 에서 `module` 을 적용 후 `output` 으로 나온다.
+결론: `entry` 에서 `module` 을 적용 후 플러그인을 지나 `output` 으로 출력된다.
 
----f
+---
 
 ```javascript
 module : {
@@ -117,6 +142,66 @@ options: {
     presets: ["@babel/preset-env"]
 }
 ```
+
+#### Hot loader
+
+프론트엔드의 코드 변경점을 저장시마다 반영 해보자
+- nodemon 과 비슷한 동작
+  
+1. install package
+    ```
+    yarn add -D react-hot-loader webpack-dev-server
+    or
+    npm install -D react-hot-loader webpack-dev-server
+    ```
+
+`webpack-dev-server` 는 `webpack.config.js` 를 읽어서 서버로 유지해준다.
+
+2. package.json 스크립트 추가
+  
+    ```
+    "scripts": {
+        "start": "webpack-dev-server --open --config ./config/webpack.config.js --hot",
+      },
+    ```
+    webpack-dev-server 명령어를 이용하고 끝에 --hot 을 붙여 주면 된다.
+
+3.  webpack.config.js 에 `devServer` 추가
+    ```javascript
+    //webpack.config.js
+    module.exports = {
+      ...,
+      ...,
+      devServer: {
+      host: "localhost",
+      port: 4000
+      }
+    }
+    ``` 
+    위와 같이 설정하면 localhost:4000 번에 열리게 된다.
+---
+
+#### index.html 경로
+
+`webpack` 은 기본적으로 프로젝트 루트 경로의 `index.html` 을 찾는다. 
+
+이를 바꿔주기 위해서는 `html-webpack-plugin` 을 웹팩에 추가해주자
+
+    const HtmlWebpackPlugin = require("html-webpack-plugin");
+    ...
+    
+    module.export = {
+    ...,
+    plugins: [
+        new HtmlWebpackPlugin({
+          template: path.join(__dirname, "../public/index.html"),
+          inject: true
+        })
+      ],
+    ...,
+    }
+
+위와 같이 추가 해주면 index.html 을 타겟한다.
 
 ---
 
